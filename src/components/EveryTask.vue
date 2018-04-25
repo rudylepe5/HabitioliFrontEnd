@@ -1,10 +1,9 @@
 <template>
-    <div name="everyHabit">
+    <div name="everyTask">
     <div class="col-lg-3 col-md-3 col-xs-6 card">
       <a class="d-block mb-4 h-100" >
-        <h4 id="color" > {{ idHabit }} {{ title }} {{ idUser }}</h4>
-        <button v-on:click = "changeColor()" >+</button>
-        <button>-</button>
+        <h4 id="color" > {{ idTask }} {{ nameTask }} {{ idUser }}</h4>
+        <button>Done</button>
         <button v-on:click = "editHabit()">Edit</button>
         <button v-on:click = "deleteHabit()">Delete</button>
       </a>
@@ -15,8 +14,8 @@
 <script>
 import axios from "axios"
 export default {
-  name: "EveryHabit",
-  props: ['title', 'idHabit', 'idUser'],
+  name: "EveryTask",
+  props: ['nameTask', 'idTask', 'idUser'],
   data(){
       
       return{
@@ -24,22 +23,18 @@ export default {
       }
   },
   methods:{
-        changeColor(){
-            document.getElementById("color").style.color = this.idUser+"";
-            console.log("Venga"+ this.idUser);
-        },
-        deleteHabit(){
+        deleteTask(){
             axios.delete('http://10.43.63.245:8080/Habitioli-USER-API-master/habits/')
             .then(response => {
                 console.log(response.data);
-                this.$parent.$router.replace({ name: 'Habits', params: { id: this.idUser }});
+                this.$parent.$router.replace({ name: 'Tasks', params: { id: this.idUser }});
             })
             .catch(function (error) {
                 console.log(error);
             });
         },
-        editHabit(){
-            this.$parent.$router.replace({ name: 'EditHabit', params: { id: this.idUser, idHabit: this.idHabit }});
+        editTask(){
+            this.$parent.$router.replace({ name: 'EditTask', params: { id: this.idUser, idTask: this.idTask }});
         }
   }
 }

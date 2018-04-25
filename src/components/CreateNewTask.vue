@@ -1,5 +1,5 @@
 <template>
-<div class="editHabit">
+<div class="createNewTask">
 
     <nav>
         <div class="nav-wrapper">
@@ -12,12 +12,13 @@
         </div>
     </nav>
 
-    <p>Edit Habit</p>
-    <input type="text" v-model="nameHabit" placeholder="Tittle of habit"><br>
-    <input type="text" v-model="difficulty" placeholder="Difficulty (Easy, Medium or Hard)"><br>
-    <input type="text" v-model="goodBad" placeholder="Good, Bad or Both"><br>
-    <input type="text" v-model="comments" placeholder="Comments"><br>
-    <button v-on:click= "editHabit()">Edit it</button>
+    <p>New Task</p>
+    <input type="text" v-model="nameTask" placeholder="Name of task"><br>
+    <input type="text" v-model="description" placeholder="Description"><br>
+    <input type="text" v-model="dueDate" placeholder="Due Date"><br>
+    <input type="text" v-model="daysBefore" placeholder="Remind me this many days"><br>
+    <input type="text" v-model="hourOfDay" placeholder="Hour of day you want to be reminded."><br>
+    <button v-on:click= "createTask()">Create it</button>
 
 </div>
 </template>
@@ -25,7 +26,7 @@
 <script>
 import axios from "axios"
 export default{
-    name: 'EditHabit',
+    name: 'CreateNewTask',
     methods:{
         habits(){
             this.$router.push({ name: 'Habits', params: { id:this.$route.params.id }});
@@ -39,20 +40,20 @@ export default{
         logOut(){
             this.$router.push({ name: 'Login' });
         },
-        editHabit(){
+        createTask(){
             console.log("userId:" + this.$route.params.id);
-            console.log("title:" + this.nameHabit);
-            console.log("difficulty:" + this.difficulty);
-            console.log("goodBad:" + this.goodBad);
-            console.log("score:" + 0);
-            console.log("data:" + this.comments);
+            console.log("nameTask:" + this.nameTask);
+            console.log("description:" + this.description);
+            console.log("dueDate:" + this.dueDate);
+            console.log("daysBefore:" + this.daysBefore);
+            console.log("hourOfDay:" + this.hourOfDay);
             axios.post('http://10.43.63.245:8080/Habitioli-USER-API-master/habits/', {
                 idUser:this.$route.params.id,
-                idHabit:'prueba',
-                title:this.nameHabit
+                idTask:'prueba',
+                nameTask:this.nameTask
             }).then(response => {
                 console.log(response.data);
-                this.$router.push({ name: 'Habits', params: { id:this.$route.params.id }});
+                this.$router.push({ name: 'Tasks', params: { id:this.$route.params.id }});
             })
             .catch(function (error) {
                 console.log(error);

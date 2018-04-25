@@ -10,6 +10,9 @@ import Tasks from '@/components/Tasks'
 import CreateNewHabit from '@/components/CreateNewHabit'
 import EveryHabit from '@/components/EveryHabit'
 import EditHabit from '@/components/EditHabit'
+import CreateNewTask from '@/components/CreateNewTask'
+import EveryTask from '@/components/EveryTask'
+import EditTask from '@/components/EditTask'
 
 Vue.use(Router)
 
@@ -49,14 +52,29 @@ let router = new Router({
       component: EveryHabit
     },
     {
+      path: '/everyTask',
+      name: 'EveryTask',
+      component: EveryTask
+    },
+    {
       path: '/home/habit/editHabit/:id/:idHabit',
       name: 'EditHabit',
       component: EditHabit
     },
     {
+      path: '/home/habit/editHabit/:id/:idTask',
+      name: 'EditTask',
+      component: EditTask
+    },
+    {
       path: '/home/habit/createNewHabit/:id',
       name: 'CreateNewHabit',
       component: CreateNewHabit
+    },
+    {
+      path: '/home/habit/createNewTask/:id',
+      name: 'CreateNewTask',
+      component: CreateNewTask
     },
     {
       path: '/home/:id',

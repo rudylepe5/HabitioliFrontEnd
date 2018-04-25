@@ -23,7 +23,7 @@ export default {
     name: 'Home',
     methods:{
         deleteAccount(){
-        axios.delete('http://10.43.96.88:8084/Spring4MVCCRUDRestService/user/delete/'+this.$route.params.id )
+        axios.delete('http://10.43.41.111:8084/Spring4MVCCRUDRestService/user/delete/'+this.$route.params.id )
         .then(response => {
             console.log(response.data);
             this.$router.push({ name: 'Login' });

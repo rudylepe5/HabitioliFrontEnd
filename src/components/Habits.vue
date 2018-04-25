@@ -73,5 +73,4 @@ export default {
 
 <style>
 @import 'materialize-css';
-
 </style>

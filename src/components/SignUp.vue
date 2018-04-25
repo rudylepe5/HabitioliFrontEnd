@@ -28,7 +28,7 @@ export default {
 
     methods: {
     signUp(){
-        axios.post('http://10.43.96.88:8084/Spring4MVCCRUDRestService/signup/', {
+        axios.post('http://10.43.41.111:8084/Spring4MVCCRUDRestService/signup/', {
             name: this.name,
             mail: this.mail
         })
