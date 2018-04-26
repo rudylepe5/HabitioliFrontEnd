@@ -18,7 +18,7 @@
     <input type="text" v-model="dueDate" placeholder="Due Date"><br>
     <input type="text" v-model="daysBefore" placeholder="Remind me this many days"><br>
     <input type="text" v-model="hourOfDay" placeholder="Hour of day you want to be reminded."><br>
-    <button v-on:click= "createHabit()">Edit it</button>
+    <button v-on:click= "editTask()">Edit it</button>
 
 </div>
 </template>
@@ -40,24 +40,27 @@ export default{
         logOut(){
             this.$router.push({ name: 'Login' });
         },
-        editHabit(){
+        editTask(){
             console.log("userId:" + this.$route.params.id);
             console.log("nameTask:" + this.nameTask);
             console.log("description:" + this.description);
             console.log("dueDate:" + this.dueDate);
             console.log("daysBefore:" + this.daysBefore);
             console.log("hourOfDay:" + this.hourOfDay);
-            axios.post('http://10.43.63.245:8080/Habitioli-USER-API-master/habits/', {
-                idUser:this.$route.params.id,
-                idTask:'prueba',
-                nameTask:this.nameTask
-            }).then(response => {
+            axios.put('http://10.43.92.158:3000/task/user?email='+this.$route.params.id+'&title='+this.$route.params.idTask,{
+                    title:this.nameTask,
+                    description:this.description,
+                    dueDate:this.dueDate,
+                    reminderDate:this.daysBefore,
+                    reminderDaysBeforeDueDate: this.hourOfDay
+                    })
+            .then(response => {
                 console.log(response.data);
-                this.$router.push({ name: 'Tasks', params: { id:this.$route.params.id }});
+                this.$parent.$router.push({ name: 'Tasks', params: { id:this.$route.params.id }});
             })
             .catch(function (error) {
                 console.log(error);
-            });
+            });          
             
 
         }

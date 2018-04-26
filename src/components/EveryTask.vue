@@ -6,7 +6,7 @@
         <p>{{ description }} </p>
         <p> <b>Due Date:</b> {{ dueDate }}</p>
         <p> <b>Reminder Date:</b> {{ reminderDate }} <b>at</b> {{ reminderHour }}</p>
-        <button>Done</button>
+        <button v-on:click = "taskDone()">Done</button>
         <button v-on:click = "editTask()">Edit</button>
         <button v-on:click = "deleteTask()">Delete</button>
       </a>
@@ -18,7 +18,7 @@
 import axios from "axios"
 export default {
   name: "EveryTask",
-  props: ['title', 'idTask', 'idUser', 'description', 'dueDate', 'reminderDate', 'reminderHour'],
+  props: ['title', 'idTask', 'idUser', 'description', 'dueDate', 'reminderDate', 'reminderHour', 'status'],
   data(){
       
       return{
@@ -27,7 +27,7 @@ export default {
   },
   methods:{
         deleteTask(){
-            axios.delete('http://10.43.92.158:3000/task',{
+            axios.delete('http://10.43.92.158:3000/task/user',{
                         params : {
                             email : this.idUser,
                             title : this.title
@@ -35,14 +35,26 @@ export default {
                     })
             .then(response => {
                 console.log(response.data);
-                this.$parent.$router.push({ name: 'Tasks', params: { id: this.idUser }});
+                this.$parent.$router.go({ name: 'Tasks', params: { id: this.idUser }});
             })
             .catch(function (error) {
                 console.log(error);
             });
         },
         editTask(){
-            this.$parent.$router.push({ name: 'EditTask', params: { id: this.idUser, idTask: this.idTask }});
+            this.$parent.$router.push({ name: 'EditTask', params: { id: this.idUser, idTask: this.title }});
+        },
+        taskDone(){
+            axios.put('http://10.43.92.158:3000/task/user?email='+this.idUser+'&title='+this.title,{
+                        status : 'completed'
+                    })
+            .then(response => {
+                console.log(response.data);
+                this.$parent.$router.go({ name: 'Tasks', params: { id: this.idUser }});
+            })
+            .catch(function (error) {
+                console.log(error);
+            });            
         }
   }
 }

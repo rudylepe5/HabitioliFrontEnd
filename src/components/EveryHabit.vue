@@ -38,7 +38,7 @@ export default {
                     })
             .then(response => {
                 console.log(response.data);
-                this.$parent.$router.replace({ name: 'Habits', params: { id: this.idUser }});
+                this.$parent.$router.go({ name: 'Habits', params: { id: this.idUser }});
             })
             .catch(function (error) {
                 console.log(error);

@@ -15,7 +15,7 @@
     </nav>
 
       <template v-for="eachTask in task">
-        <EveryTask :key='eachTask.idUser' :title="eachTask.title" :idHabit="eachTask.idTask" :description="eachTask.description" :dueDate="eachTask.dueDate" :reminderDate="eachTask.reminderDate" :reminderHour="eachTask.reminderHour" v-bind='eachTask'></EveryTask>
+        <EveryTask :key='eachTask.idUser' :title="eachTask.title" :idHabit="eachTask.idTask" :description="eachTask.description" :dueDate="eachTask.dueDate" :reminderDate="eachTask.reminderDate" :reminderHour="eachTask.reminderHour" :status="eachTask.status" v-bind='eachTask'></EveryTask>
       </template>
 
 
@@ -52,7 +52,7 @@ export default {
             this.$router.push({ name: 'CreateNewTask', params: { id:this.$route.params.id }});
         },
         getTasks(){
-                    axios.get('http://10.43.92.158:3000/task/user',{
+                    axios.get('http://10.43.92.158:3000/task/user/pending',{
                         params : {
                             email : this.$route.params.id
                         }
@@ -62,7 +62,8 @@ export default {
                             console.log(response.data[i].email);
                             console.log(response.data[i].title);
                             this.$data.task.push({ idTask : response.data[i]._id, idUser : response.data[i].email, title : response.data[i].title, 
-                            description : response.data[i].description, dueDate : response.data[i].dueDate, reminderDate :response.data[i].reminderDate, reminderHour :response.data[i].reminderDaysBeforeDueDate });
+                            description : response.data[i].description, dueDate : response.data[i].dueDate, reminderDate :response.data[i].reminderDate, 
+                            reminderHour :response.data[i].reminderDaysBeforeDueDate, status :  response.data[i].status});
                         }
                     })
                     .catch(function (error) {
