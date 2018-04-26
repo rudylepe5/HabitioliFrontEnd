@@ -15,7 +15,7 @@
     </nav>
 
       <template v-for="eachHabit in habit">
-        <EveryHabit :key='eachHabit.idUser' :title="eachHabit.title" :comments="eachHabit.comments" v-bind='eachHabit'></EveryHabit>
+        <EveryHabit :key='eachHabit.idUser' :title="eachHabit.title" :comments="eachHabit.comments" :color="eachHabit.color" v-bind='eachHabit'></EveryHabit>
       </template>
 
 
@@ -60,7 +60,8 @@ export default {
                     .then(response => {
                         for(var i in response.data){
                             console.log(response.data[i].idUser);
-                            this.$data.habit.push({title : response.data[i].title, comments : response.data[i].comments, idUser : response.data[i].email});
+                            this.$data.habit.push({title : response.data[i].title, comments : response.data[i].comments, idUser : response.data[i].email, 
+                            color : response.data[i].color});
                         }
                     })
                     .catch(function (error) {

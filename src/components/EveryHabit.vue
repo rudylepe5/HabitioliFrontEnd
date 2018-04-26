@@ -26,7 +26,7 @@ export default {
   },
   methods:{
         changeColor(){
-            this.color = this.idUser+"-text";
+            this.color = this.color+"-text";
             console.log("Venga"+ this.idUser);
         },
         deleteHabit(){
