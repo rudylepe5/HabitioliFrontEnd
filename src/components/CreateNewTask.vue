@@ -47,7 +47,7 @@ export default{
             console.log("dueDate:" + this.dueDate);
             console.log("daysBefore:" + this.daysBefore);
             console.log("hourOfDay:" + this.hourOfDay);
-            axios.post('http://10.43.92.158:3000/tasks', {
+            axios.post('http://10.43.92.158:3000/task', {
                 email:this.$route.params.id,
                 title:this.nameTask,
                 description:this.description,

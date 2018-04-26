@@ -27,17 +27,22 @@ export default {
   },
   methods:{
         deleteTask(){
-            axios.delete('http://10.43.92.158:3000/tasks')
+            axios.delete('http://10.43.92.158:3000/task',{
+                        params : {
+                            email : this.idUser,
+                            title : this.title
+                        }
+                    })
             .then(response => {
                 console.log(response.data);
-                this.$parent.$router.replace({ name: 'Tasks', params: { id: this.idUser }});
+                this.$parent.$router.push({ name: 'Tasks', params: { id: this.idUser }});
             })
             .catch(function (error) {
                 console.log(error);
             });
         },
         editTask(){
-            this.$parent.$router.replace({ name: 'EditTask', params: { id: this.idUser, idTask: this.idTask }});
+            this.$parent.$router.push({ name: 'EditTask', params: { id: this.idUser, idTask: this.idTask }});
         }
   }
 }

@@ -2,7 +2,8 @@
     <div name="everyHabit">
     <div class="col-lg-3 col-md-3 col-xs-6 card">
       <a class="d-block mb-4 h-100" >
-        <h4 id="color" > {{ idHabit }} {{ title }} {{ idUser }}</h4>
+        <h4 :class="color" > {{ title }} </h4>
+        <h6 :class="color" > {{ comments }}</h6>
         <button v-on:click = "changeColor()" >+</button>
         <button>-</button>
         <button v-on:click = "editHabit()">Edit</button>
@@ -16,20 +17,25 @@
 import axios from "axios"
 export default {
   name: "EveryHabit",
-  props: ['title', 'idHabit', 'idUser'],
+  props: ['title', 'comments', 'idUser'],
   data(){
       
       return{
-          
+          color:""
       }
   },
   methods:{
         changeColor(){
-            document.getElementById("color").style.color = this.idUser+"";
+            this.color = this.idUser+"-text";
             console.log("Venga"+ this.idUser);
         },
         deleteHabit(){
-            axios.delete('http://10.43.63.245:8080/Habitioli-USER-API-master/habits/')
+            axios.delete('http://10.43.92.124:3000/habit',{
+                        params : {
+                            email : this.idUser,
+                            title : this.title
+                        }
+                    })
             .then(response => {
                 console.log(response.data);
                 this.$parent.$router.replace({ name: 'Habits', params: { id: this.idUser }});
@@ -41,6 +47,9 @@ export default {
         editHabit(){
             this.$parent.$router.replace({ name: 'EditHabit', params: { id: this.idUser, idHabit: this.idHabit }});
         }
+  },
+  beforeMount(){
+      this.changeColor();
   }
 }
 </script>

@@ -52,7 +52,11 @@ export default {
             this.$router.push({ name: 'CreateNewTask', params: { id:this.$route.params.id }});
         },
         getTasks(){
-                    axios.get('http://10.43.92.158:3000/tasks')
+                    axios.get('http://10.43.92.158:3000/task/user',{
+                        params : {
+                            email : this.$route.params.id
+                        }
+                    })
                     .then(response => {
                         for(var i in response.data){
                             console.log(response.data[i].email);

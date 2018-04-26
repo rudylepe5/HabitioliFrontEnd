@@ -15,7 +15,7 @@
     </nav>
 
       <template v-for="eachHabit in habit">
-        <EveryHabit :key='eachHabit.idUser' :title="eachHabit.title" :idHabit="eachHabit.idHabit" v-bind='eachHabit'></EveryHabit>
+        <EveryHabit :key='eachHabit.idUser' :title="eachHabit.title" :comments="eachHabit.comments" v-bind='eachHabit'></EveryHabit>
       </template>
 
 
@@ -52,11 +52,15 @@ export default {
             this.$router.push({ name: 'CreateNewHabit', params: { id:this.$route.params.id }});
         },
         getHabits(){
-                    axios.get('http://10.43.63.245:8080/Habitioli-USER-API-master/habits/')
+                    axios.get('http://10.43.92.124:3000/habit/user',{
+                        params : {
+                            email : this.$route.params.id
+                        }
+                    })
                     .then(response => {
                         for(var i in response.data){
                             console.log(response.data[i].idUser);
-                            this.$data.habit.push({title : response.data[i].title, idHabit : response.data[i].idHabit, idUser : response.data[i].idUser});
+                            this.$data.habit.push({title : response.data[i].title, comments : response.data[i].comments, idUser : response.data[i].email});
                         }
                     })
                     .catch(function (error) {
