@@ -4,8 +4,17 @@
       <a class="d-block mb-4 h-100" >
         <h4 :class="colour" > {{ title }} </h4>
         <h6 :class="colour" > {{ comments }}</h6>
+        <div v-if="goodBad[0] === 'good'">
         <button v-on:click = "add()" >+</button>
+        </div>
+        <div v-else-if="goodBad[0] === 'bad'">
         <button v-on:click = "minus()">-</button>
+        </div>
+        <div v-else-if="goodBad[0] === 'both'">
+            <button v-on:click = "add()" >+</button>
+            <button v-on:click = "minus()">-</button>
+        </div>
+        <br>
         <button v-on:click = "editHabit()">Edit</button>
         <button v-on:click = "deleteHabit()">Delete</button>
       </a>
@@ -17,7 +26,7 @@
 import axios from "axios"
 export default {
   name: "EveryHabit",
-  props: ['title', 'comments', 'idUser', 'colour', 'difficulty', 'score'],
+  props: ['title', 'comments', 'idUser', 'colour', 'difficulty', 'score', 'goodBad'],
   data(){
       
       return{

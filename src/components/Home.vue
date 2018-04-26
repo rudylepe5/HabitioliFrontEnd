@@ -23,6 +23,20 @@ export default {
     name: 'Home',
     methods:{
         deleteAccount(){
+        axios.delete('http://10.43.100.151:3000/habit/user/delete?email='+this.$route.params.id )
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        axios.delete('10.43.92.158:3000/task/delete/user?email='+this.$route.params.id )
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
         axios.delete('http://10.43.41.111:8084/Spring4MVCCRUDRestService/user/delete/'+this.$route.params.id )
         .then(response => {
             console.log(response.data);
@@ -31,6 +45,7 @@ export default {
         .catch(function (error) {
             console.log(error);
         });
+
         },
         habits(){
             this.$router.push({ name: 'Habits', params: { id:this.$route.params.id }});

@@ -14,9 +14,45 @@
 
     <p>Edit Habit</p>
     <input type="text" v-model="nameHabit" placeholder="Tittle of habit"><br>
-    <input type="text" v-model="difficulty" placeholder="Difficulty (Easy, Medium or Hard)"><br>
-    <input type="text" v-model="goodBad" placeholder="Good, Bad or Both"><br>
-    <input type="text" v-model="comments" placeholder="Comments"><br>
+    <input type="text" v-model="comments" placeholder="Description"><br>
+    <h5>Difficulty</h5>
+    
+    
+      <label>
+        <input name="group1" type="radio" value="easy" v-model="difficulty" checked />
+        <span>Easy</span>
+      </label>
+
+      <label>
+        <input name="group1" type="radio" value="medium" v-model="difficulty" />
+        <span>Medium</span>
+      </label>
+      <label>
+        <input name="group1" type="radio" value="hard" v-model="difficulty"  />
+        <span>Hard</span>
+      </label>
+   
+    <br>
+    <br>
+        <h5>Type</h5>
+    
+    
+      <label>
+        <input name="group2" type="radio" value="good" v-model="goodBad" checked />
+        <span>Good</span>
+      </label>
+      <label>
+        <input name="group2" type="radio" value="bad" v-model="goodBad" />
+        <span>Bad</span>
+      </label>
+
+      <label>
+        <input name="group2" type="radio" value="both" v-model="goodBad"  />
+        <span>Both</span>
+      </label>
+    <br>
+    <br>
+    
     <button v-on:click= "editHabit()">Edit it</button>
 
 </div>

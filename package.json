@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "materialize-css": "^1.0.0-beta",
+    "pretty-checkbox-vue": "^1.1.8",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-select": "^2.4.0",

@@ -82,9 +82,8 @@ export default {
 
 <style>
 @import 'materialize-css';
-
 .card{
-  padding: 2%;
+  padding: 8%;
+  
 }
-
 </style>

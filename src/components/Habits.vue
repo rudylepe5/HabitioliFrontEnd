@@ -16,7 +16,7 @@
 
     <div class="card">
       <template v-for="eachHabit in habit">
-        <EveryHabit :key='eachHabit.idUser' :title="eachHabit.title" :comments="eachHabit.comments" :colour="eachHabit.colour" :difficulty="eachHabit.difficulty" :score="eachHabit.score" v-bind='eachHabit'></EveryHabit>
+        <EveryHabit :key='eachHabit.idUser' :title="eachHabit.title" :comments="eachHabit.comments" :colour="eachHabit.colour" :difficulty="eachHabit.difficulty" :score="eachHabit.score" :goodBad="eachHabit.goodBad" v-bind='eachHabit'></EveryHabit>
       </template>
     </div>
 
@@ -63,7 +63,7 @@ export default {
                         for(var i in response.data){
                             console.log(response.data[i].colour);
                             this.$data.habit.push({title : response.data[i].title, comments : response.data[i].comments, idUser : response.data[i].email, 
-                            colour : response.data[i].colour, difficulty : response.data[i].difficulty, score : response.data[i].score});
+                            colour : response.data[i].colour, difficulty : response.data[i].difficulty, score : response.data[i].score, goodBad : response.data[i].goodBad});
                         }
                     })
                     .catch(function (error) {
@@ -81,6 +81,6 @@ export default {
 <style>
 @import 'materialize-css';
 .card{
-  padding: 2%;
+  padding: 8%;
 }
 </style>
