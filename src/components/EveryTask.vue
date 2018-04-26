@@ -2,10 +2,13 @@
     <div name="everyTask">
     <div class="col-lg-3 col-md-3 col-xs-6 card">
       <a class="d-block mb-4 h-100" >
-        <h4 id="color" > {{ idTask }} {{ nameTask }} {{ idUser }}</h4>
+        <h5 id="color" > {{ title }} </h5>
+        <p>{{ description }} </p>
+        <p> <b>Due Date:</b> {{ dueDate }}</p>
+        <p> <b>Reminder Date:</b> {{ reminderDate }} <b>at</b> {{ reminderHour }}</p>
         <button>Done</button>
-        <button v-on:click = "editHabit()">Edit</button>
-        <button v-on:click = "deleteHabit()">Delete</button>
+        <button v-on:click = "editTask()">Edit</button>
+        <button v-on:click = "deleteTask()">Delete</button>
       </a>
     </div>
   </div>
@@ -15,7 +18,7 @@
 import axios from "axios"
 export default {
   name: "EveryTask",
-  props: ['nameTask', 'idTask', 'idUser'],
+  props: ['title', 'idTask', 'idUser', 'description', 'dueDate', 'reminderDate', 'reminderHour'],
   data(){
       
       return{
@@ -24,7 +27,7 @@ export default {
   },
   methods:{
         deleteTask(){
-            axios.delete('http://10.43.63.245:8080/Habitioli-USER-API-master/habits/')
+            axios.delete('http://10.43.92.158:3000/tasks')
             .then(response => {
                 console.log(response.data);
                 this.$parent.$router.replace({ name: 'Tasks', params: { id: this.idUser }});

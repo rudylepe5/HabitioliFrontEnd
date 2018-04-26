@@ -47,10 +47,13 @@ export default{
             console.log("dueDate:" + this.dueDate);
             console.log("daysBefore:" + this.daysBefore);
             console.log("hourOfDay:" + this.hourOfDay);
-            axios.post('http://10.43.63.245:8080/Habitioli-USER-API-master/habits/', {
-                idUser:this.$route.params.id,
-                idTask:'prueba',
-                nameTask:this.nameTask
+            axios.post('http://10.43.92.158:3000/tasks', {
+                email:this.$route.params.id,
+                title:this.nameTask,
+                description:this.description,
+                dueDate:this.dueDate,
+                reminderDate:this.daysBefore,
+                reminderDaysBeforeDueDate: this.hourOfDay
             }).then(response => {
                 console.log(response.data);
                 this.$router.push({ name: 'Tasks', params: { id:this.$route.params.id }});

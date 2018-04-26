@@ -15,7 +15,7 @@
     </nav>
 
       <template v-for="eachTask in task">
-        <EveryTask :key='eachTask.idUser' :title="eachTask.title" :idHabit="eachTask.idTask" v-bind='eachTask'></EveryTask>
+        <EveryTask :key='eachTask.idUser' :title="eachTask.title" :idHabit="eachTask.idTask" :description="eachTask.description" :dueDate="eachTask.dueDate" :reminderDate="eachTask.reminderDate" :reminderHour="eachTask.reminderHour" v-bind='eachTask'></EveryTask>
       </template>
 
 
@@ -52,11 +52,13 @@ export default {
             this.$router.push({ name: 'CreateNewTask', params: { id:this.$route.params.id }});
         },
         getTasks(){
-                    axios.get('http://10.43.63.245:8080/Habitioli-USER-API-master/habits/')
+                    axios.get('http://10.43.92.158:3000/tasks')
                     .then(response => {
                         for(var i in response.data){
-                            console.log(response.data[i].idUser);
-                            this.$data.habit.push({title : response.data[i].title, idTask : response.data[i].idTask, idUser : response.data[i].idUser});
+                            console.log(response.data[i].email);
+                            console.log(response.data[i].title);
+                            this.$data.task.push({ idTask : response.data[i]._id, idUser : response.data[i].email, title : response.data[i].title, 
+                            description : response.data[i].description, dueDate : response.data[i].dueDate, reminderDate :response.data[i].reminderDate, reminderHour :response.data[i].reminderDaysBeforeDueDate });
                         }
                     })
                     .catch(function (error) {
