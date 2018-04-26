@@ -2,10 +2,10 @@
     <div name="everyTask">
     <div class="col-lg-3 col-md-3 col-xs-6 card">
       <a class="d-block mb-4 h-100" >
-        <h5 id="color" > {{ title }} </h5>
-        <p>{{ description }} </p>
-        <p> <b>Due Date:</b> {{ dueDate }}</p>
-        <p> <b>Reminder Date:</b> {{ reminderDate }} <b>at</b> {{ reminderHour }}</p>
+        <h5 :class="color"> {{ title }} </h5>
+        <p :class="color" >{{ description }} </p>
+        <p :class="color"> <b>Due Date:</b> {{ dueDate }}</p>
+        <p :class="color"> <b>Reminder Date:</b> {{ reminderDate }} <b>at</b> {{ reminderHour }}</p>
         <button v-on:click = "taskDone()">Done</button>
         <button v-on:click = "editTask()">Edit</button>
         <button v-on:click = "deleteTask()">Delete</button>
@@ -22,7 +22,7 @@ export default {
   data(){
       
       return{
-          
+          color:""
       }
   },
   methods:{
@@ -55,7 +55,36 @@ export default {
             .catch(function (error) {
                 console.log(error);
             });            
+        },
+        checkDay(){
+            var date = new Date();
+            this.dueDate = this.dueDate.substring(0, this.dueDate.indexOf('T'));
+            this.reminderDate = this.reminderDate.substring(0, this.reminderDate.indexOf('T'));
+            var month = date.getUTCMonth() + 1;
+            var day = date.getUTCDate();
+            var year = date.getUTCFullYear();
+            if(month < 10){
+                var fullDate = year + "-0" + month + "-" + day;
+            }
+            else{
+                var fullDate = year + "-" + month + "-" + day;
+            }
+            
+
+            if(fullDate == this.dueDate){
+                this.color="red-text";
+            }
+            else{
+                this.color="blue-text";
+                
+            }
+            console.log(this.color);
+            console.log(fullDate);
+            console.log(this.dueDate);
         }
+  },
+  beforeMount(){
+      this.checkDay();
   }
 }
 </script>
@@ -64,3 +93,4 @@ export default {
 @import 'materialize-css';
 
 </style>
+

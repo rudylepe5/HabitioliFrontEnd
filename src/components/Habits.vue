@@ -14,9 +14,11 @@
         </div>
     </nav>
 
+    <div class="card">
       <template v-for="eachHabit in habit">
-        <EveryHabit :key='eachHabit.idUser' :title="eachHabit.title" :comments="eachHabit.comments" :color="eachHabit.color" v-bind='eachHabit'></EveryHabit>
+        <EveryHabit :key='eachHabit.idUser' :title="eachHabit.title" :comments="eachHabit.comments" :colour="eachHabit.colour" :difficulty="eachHabit.difficulty" :score="eachHabit.score" v-bind='eachHabit'></EveryHabit>
       </template>
+    </div>
 
 
   </div>
@@ -52,16 +54,16 @@ export default {
             this.$router.push({ name: 'CreateNewHabit', params: { id:this.$route.params.id }});
         },
         getHabits(){
-                    axios.get('http://10.43.92.124:3000/habit/user',{
+                    axios.get('http://10.43.100.151:3000/habit/user',{
                         params : {
                             email : this.$route.params.id
                         }
                     })
                     .then(response => {
                         for(var i in response.data){
-                            console.log(response.data[i].idUser);
+                            console.log(response.data[i].colour);
                             this.$data.habit.push({title : response.data[i].title, comments : response.data[i].comments, idUser : response.data[i].email, 
-                            color : response.data[i].color});
+                            colour : response.data[i].colour, difficulty : response.data[i].difficulty, score : response.data[i].score});
                         }
                     })
                     .catch(function (error) {
@@ -78,4 +80,7 @@ export default {
 
 <style>
 @import 'materialize-css';
+.card{
+  padding: 2%;
+}
 </style>

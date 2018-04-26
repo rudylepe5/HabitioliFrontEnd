@@ -13,10 +13,11 @@
             </ul>
         </div>
     </nav>
-
+        <div class="card">
       <template v-for="eachTask in task">
         <EveryTask :key='eachTask.idUser' :title="eachTask.title" :idHabit="eachTask.idTask" :description="eachTask.description" :dueDate="eachTask.dueDate" :reminderDate="eachTask.reminderDate" :reminderHour="eachTask.reminderHour" :status="eachTask.status" v-bind='eachTask'></EveryTask>
       </template>
+      </div>
 
 
   </div>
@@ -68,6 +69,7 @@ export default {
                     })
                     .catch(function (error) {
                         console.log(error);
+                        //M.toast({html: 'Now working'})
                     });
         }
     },
@@ -80,5 +82,9 @@ export default {
 
 <style>
 @import 'materialize-css';
+
+.card{
+  padding: 2%;
+}
 
 </style>

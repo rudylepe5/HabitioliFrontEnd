@@ -19,11 +19,14 @@
     <input type="text" v-model="comments" placeholder="Comments"><br>
     <button v-on:click= "createHabit()">Create it</button>
 
+
+
 </div>
 </template>
 
 <script>
 import axios from "axios"
+
 export default{
     name: 'CreateNewHabit',
     methods:{
@@ -46,11 +49,12 @@ export default{
             console.log("goodBad:" + this.goodBad);
             console.log("score:" + 20);
             console.log("data:" + this.comments);
-            axios.post('http://10.43.92.124:3000/habit', {
+            axios.post('http://10.43.100.151:3000/habit', {
                 email:this.$route.params.id,
                 title:this.nameHabit,
                 comments:this.comments,
                 score: 20,
+                colour: "yellow",
                 difficulty:this.difficulty,
                 goodBad:this.goodBad
             }).then(response => {

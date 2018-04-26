@@ -44,12 +44,12 @@ export default{
             console.log("title:" + this.nameHabit);
             console.log("difficulty:" + this.difficulty);
             console.log("goodBad:" + this.goodBad);
-            console.log("score:" + 0);
             console.log("data:" + this.comments);
-            axios.post('http://10.43.63.245:8080/Habitioli-USER-API-master/habits/', {
-                idUser:this.$route.params.id,
-                idHabit:'prueba',
-                title:this.nameHabit
+            axios.put('http://10.43.100.151:3000/habit?email='+this.$route.params.id+'&title='+this.$route.params.idHabit, {
+                title:this.nameHabit,
+                comments:this.comments,
+                difficulty:this.difficulty,
+                goodBad:this.goodBad
             }).then(response => {
                 console.log(response.data);
                 this.$router.push({ name: 'Habits', params: { id:this.$route.params.id }});

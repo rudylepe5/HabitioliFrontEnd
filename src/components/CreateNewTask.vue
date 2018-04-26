@@ -15,8 +15,8 @@
     <p>New Task</p>
     <input type="text" v-model="nameTask" placeholder="Name of task"><br>
     <input type="text" v-model="description" placeholder="Description"><br>
-    <input type="text" v-model="dueDate" placeholder="Due Date"><br>
-    <input type="text" v-model="daysBefore" placeholder="Remind me this many days"><br>
+    <datepicker v-model="dueDate" placeholder="Due Date"><br></datepicker>
+    <datepicker v-model="daysBefore" placeholder="Remind me this many days"><br></datepicker>
     <input type="text" v-model="hourOfDay" placeholder="Hour of day you want to be reminded."><br>
     <button v-on:click= "createTask()">Create it</button>
 
@@ -25,8 +25,12 @@
 
 <script>
 import axios from "axios"
+import Datepicker from "vuejs-datepicker"
 export default{
     name: 'CreateNewTask',
+    components:{
+        Datepicker
+    },
     methods:{
         habits(){
             this.$router.push({ name: 'Habits', params: { id:this.$route.params.id }});
@@ -68,6 +72,7 @@ export default{
 }
 
 </script>
+
 
 <style>
 @import 'materialize-css';
